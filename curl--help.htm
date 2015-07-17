@@ -1,14 +1,13 @@
 <html>
 <head>
-    <title>curl --help</title>
+    <title>--help</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/coffee-script/1.3.1/coffee-script.min.js"></script>
     <script type="text/javascript" src="https://rawgit.com/dennyferra/TypeWatch/master/jquery.typewatch.js"></script>
     <script type="text/coffeescript">
 
-        # raw output of running curl --help
-
-        raw = """
+        window.rawHelp =
+            curl: """
 Usage: curl [options...] <url>
 Options: (H) means HTTP/HTTPS only, (F) means FTP only
     --anyauth       Pick "any" authentication method (H)
@@ -32,6 +31,7 @@ Options: (H) means HTTP/HTTPS only, (F) means FTP only
     --data-ascii <data>  HTTP POST ASCII data (H)
     --data-binary <data> HTTP POST binary data (H)
     --data-urlencode <name=data/name@filename> HTTP POST data url encoded (H)
+
     --digest        Use HTTP Digest Authentication (H)
     --disable-eprt  Inhibit using EPRT or LPRT (F)
     --disable-epsv  Inhibit using EPSV (F)
@@ -43,6 +43,7 @@ Options: (H) means HTTP/HTTPS only, (F) means FTP only
     --form-string <name=string> Specify HTTP multipart POST data (H)
     --ftp-account <data> Account data to send when requested by server (F)
     --ftp-alternative-to-user <cmd> String to replace "USER [name]" (F)
+
     --ftp-create-dirs Create the remote dirs if not present (F)
     --ftp-method [multicwd/nocwd/singlecwd] Control CWD usage (F)
     --ftp-pasv      Use PASV/EPSV instead of PORT (F)
@@ -70,6 +71,7 @@ Options: (H) means HTTP/HTTPS only, (F) means FTP only
     --key <key>     Private key file name (SSL/SSH)
     --key-type <type> Private key file type (DER/PEM/ENG) (SSL)
     --krb <level>   Enable Kerberos with specified security level (F)
+
     --libcurl <file> Dump libcurl equivalent code of this command line
     --limit-rate <rate> Limit transfer speed to this rate
  -J/--remote-header-name Use the header-provided filename (H)
@@ -154,14 +156,234 @@ Options: (H) means HTTP/HTTPS only, (F) means FTP only
  -q                 If used as the first parameter disables .curlrc
               """
 
-        # so we can access elsewhere
-        window.rawCurlHelp = raw
+            grep: """
+Usage: grep [OPTION]... PATTERN [FILE]...
+Search for PATTERN in each FILE or standard input.
+PATTERN is, by default, a basic regular expression (BRE).
+Example: grep -i 'hello world' menu.h main.c
+
+Regexp selection and interpretation:
+  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)
+  -F, --fixed-strings       PATTERN is a set of newline-separated fixed strings
+  -G, --basic-regexp        PATTERN is a basic regular expression (BRE)
+  -P, --perl-regexp         PATTERN is a Perl regular expression
+  -e, --regexp=PATTERN      use PATTERN for matching
+  -f, --file=FILE           obtain PATTERN from FILE
+  -i, --ignore-case         ignore case distinctions
+  -w, --word-regexp         force PATTERN to match only whole words
+  -x, --line-regexp         force PATTERN to match only whole lines
+  -z, --null-data           a data line ends in 0 byte, not newline
+
+Miscellaneous:
+  -s, --no-messages         suppress error messages
+  -v, --invert-match        select non-matching lines
+  -V, --version             print version information and exit
+      --help                display this help and exit
+      --mmap                ignored for backwards compatibility
+
+Output control:
+  -m, --max-count=NUM       stop after NUM matches
+  -b, --byte-offset         print the byte offset with output lines
+  -n, --line-number         print line number with output lines
+      --line-buffered       flush output on every line
+  -H, --with-filename       print the file name for each match
+  -h, --no-filename         suppress the file name prefix on output
+      --label=LABEL         use LABEL as the standard input file name prefix
+  -o, --only-matching       show only the part of a line matching PATTERN
+  -q, --quiet, --silent     suppress all normal output
+      --binary-files=TYPE   assume that binary files are TYPE;
+                            TYPE is `binary', `text', or `without-match'
+  -a, --text                equivalent to --binary-files=text
+  -I                        equivalent to --binary-files=without-match
+  -d, --directories=ACTION  how to handle directories;
+                            ACTION is `read', `recurse', or `skip'
+  -D, --devices=ACTION      how to handle devices, FIFOs and sockets;
+                            ACTION is `read' or `skip'
+  -R, -r, --recursive       equivalent to --directories=recurse
+      --include=FILE_PATTERN  search only files that match FILE_PATTERN
+      --exclude=FILE_PATTERN  skip files and directories matching FILE_PATTERN
+      --exclude-from=FILE   skip files matching any file pattern from FILE
+      --exclude-dir=PATTERN  directories that match PATTERN will be skipped.
+  -L, --files-without-match  print only names of FILEs containing no match
+  -l, --files-with-matches  print only names of FILEs containing matches
+  -c, --count               print only a count of matching lines per FILE
+  -T, --initial-tab         make tabs line up (if needed)
+  -Z, --null                print 0 byte after FILE name
+
+Context control:
+  -B, --before-context=NUM  print NUM lines of leading context
+  -A, --after-context=NUM   print NUM lines of trailing context
+  -C, --context=NUM         print NUM lines of output context
+  -NUM                      same as --context=NUM
+      --color[=WHEN],
+      --colour[=WHEN]       use markers to highlight the matching strings;
+                            WHEN is `always', `never', or `auto'
+  -U, --binary              do not strip CR characters at EOL (MSDOS)
+  -u, --unix-byte-offsets   report offsets as if CRs were not there (MSDOS)
+
+`egrep' means `grep -E'.  `fgrep' means `grep -F'.
+Direct invocation as either `egrep' or `fgrep' is deprecated.
+With no FILE, or when FILE is -, read standard input.  If less than two FILEs
+are given, assume -h.  Exit status is 0 if any line was selected, 1 otherwise;
+if any error occurs and -q was not given, the exit status is 2.
+"""
+    
+            wget: """
+Usage: wget [OPTION]... [URL]...
+
+Mandatory arguments to long options are mandatory for short options too.
+
+Startup:
+  -V,  --version           display the version of Wget and exit.
+  -h,  --help              print this help.
+  -b,  --background        go to background after startup.
+  -e,  --execute=COMMAND   execute a `.wgetrc'-style command.
+
+Logging and input file:
+  -o,  --output-file=FILE    log messages to FILE.
+  -a,  --append-output=FILE  append messages to FILE.
+  -d,  --debug               print lots of debugging information.
+  -q,  --quiet               quiet (no output).
+  -v,  --verbose             be verbose (this is the default).
+  -nv, --no-verbose          turn off verboseness, without being quiet.
+  -i,  --input-file=FILE     download URLs found in local or external FILE.
+  -F,  --force-html          treat input file as HTML.
+  -B,  --base=URL            resolves HTML input-file links (-i -F)
+                             relative to URL.
+       --config=FILE         Specify config file to use.
+
+Download:
+  -t,  --tries=NUMBER            set number of retries to NUMBER (0 unlimits).
+       --retry-connrefused       retry even if connection is refused.
+  -O,  --output-document=FILE    write documents to FILE.
+  -nc, --no-clobber              skip downloads that would download to
+                                 existing files (overwriting them).
+  -c,  --continue                resume getting a partially-downloaded file.
+       --progress=TYPE           select progress gauge type.
+  -N,  --timestamping            don't re-retrieve files unless newer than
+                                 local.
+  --no-use-server-timestamps     don't set the local file's timestamp by
+                                 the one on the server.
+  -S,  --server-response         print server response.
+       --spider                  don't download anything.
+  -T,  --timeout=SECONDS         set all timeout values to SECONDS.
+       --dns-timeout=SECS        set the DNS lookup timeout to SECS.
+       --connect-timeout=SECS    set the connect timeout to SECS.
+       --read-timeout=SECS       set the read timeout to SECS.
+  -w,  --wait=SECONDS            wait SECONDS between retrievals.
+       --waitretry=SECONDS       wait 1..SECONDS between retries of a retrieval.
+       --random-wait             wait from 0.5*WAIT...1.5*WAIT secs between retrievals.
+       --no-proxy                explicitly turn off proxy.
+  -Q,  --quota=NUMBER            set retrieval quota to NUMBER.
+       --bind-address=ADDRESS    bind to ADDRESS (hostname or IP) on local host.
+       --limit-rate=RATE         limit download rate to RATE.
+       --no-dns-cache            disable caching DNS lookups.
+       --restrict-file-names=OS  restrict chars in file names to ones OS allows.
+       --ignore-case             ignore case when matching files/directories.
+  -4,  --inet4-only              connect only to IPv4 addresses.
+  -6,  --inet6-only              connect only to IPv6 addresses.
+       --prefer-family=FAMILY    connect first to addresses of specified family,
+                                 one of IPv6, IPv4, or none.
+       --user=USER               set both ftp and http user to USER.
+       --password=PASS           set both ftp and http password to PASS.
+       --ask-password            prompt for passwords.
+       --no-iri                  turn off IRI support.
+       --local-encoding=ENC      use ENC as the local encoding for IRIs.
+       --remote-encoding=ENC     use ENC as the default remote encoding.
+       --unlink                  remove file before clobber.
+
+Directories:
+  -nd, --no-directories           don't create directories.
+  -x,  --force-directories        force creation of directories.
+  -nH, --no-host-directories      don't create host directories.
+       --protocol-directories     use protocol name in directories.
+  -P,  --directory-prefix=PREFIX  save files to PREFIX/...
+       --cut-dirs=NUMBER          ignore NUMBER remote directory components.
+
+HTTP options:
+       --http-user=USER        set http user to USER.
+       --http-password=PASS    set http password to PASS.
+       --no-cache              disallow server-cached data.
+       --default-page=NAME     Change the default page name (normally
+                               this is `index.html'.).
+  -E,  --adjust-extension      save HTML/CSS documents with proper extensions.
+       --ignore-length         ignore `Content-Length' header field.
+       --header=STRING         insert STRING among the headers.
+       --max-redirect          maximum redirections allowed per page.
+       --proxy-user=USER       set USER as proxy username.
+       --proxy-password=PASS   set PASS as proxy password.
+       --referer=URL           include `Referer: URL' header in HTTP request.
+       --save-headers          save the HTTP headers to file.
+  -U,  --user-agent=AGENT      identify as AGENT instead of Wget/VERSION.
+       --no-http-keep-alive    disable HTTP keep-alive (persistent connections).
+       --no-cookies            don't use cookies.
+       --load-cookies=FILE     load cookies from FILE before session.
+       --save-cookies=FILE     save cookies to FILE after session.
+       --keep-session-cookies  load and save session (non-permanent) cookies.
+       --post-data=STRING      use the POST method; send STRING as the data.
+       --post-file=FILE        use the POST method; send contents of FILE.
+       --content-disposition   honor the Content-Disposition header when
+                               choosing local file names (EXPERIMENTAL).
+       --auth-no-challenge     send Basic HTTP authentication information
+                               without first waiting for the server's
+                               challenge.
+
+HTTPS (SSL/TLS) options:
+       --secure-protocol=PR     choose secure protocol, one of auto, SSLv2,
+                                SSLv3, and TLSv1.
+       --no-check-certificate   don't validate the server's certificate.
+       --certificate=FILE       client certificate file.
+       --certificate-type=TYPE  client certificate type, PEM or DER.
+       --private-key=FILE       private key file.
+       --private-key-type=TYPE  private key type, PEM or DER.
+       --ca-certificate=FILE    file with the bundle of CA's.
+       --ca-directory=DIR       directory where hash list of CA's is stored.
+       --random-file=FILE       file with random data for seeding the SSL PRNG.
+       --egd-file=FILE          file naming the EGD socket with random data.
+
+FTP options:
+       --ftp-user=USER         set ftp user to USER.
+       --ftp-password=PASS     set ftp password to PASS.
+       --no-remove-listing     don't remove `.listing' files.
+       --no-glob               turn off FTP file name globbing.
+       --no-passive-ftp        disable the "passive" transfer mode.
+       --retr-symlinks         when recursing, get linked-to files (not dir).
+
+Recursive download:
+  -r,  --recursive          specify recursive download.
+  -l,  --level=NUMBER       maximum recursion depth (inf or 0 for infinite).
+       --delete-after       delete files locally after downloading them.
+  -k,  --convert-links      make links in downloaded HTML or CSS point to
+                            local files.
+  -K,  --backup-converted   before converting file X, back up as X.orig.
+  -m,  --mirror             shortcut for -N -r -l inf --no-remove-listing.
+  -p,  --page-requisites    get all images, etc. needed to display HTML page.
+       --strict-comments    turn on strict (SGML) handling of HTML comments.
+
+Recursive accept/reject:
+  -A,  --accept=LIST               comma-separated list of accepted extensions.
+  -R,  --reject=LIST               comma-separated list of rejected extensions.
+  -D,  --domains=LIST              comma-separated list of accepted domains.
+       --exclude-domains=LIST      comma-separated list of rejected domains.
+       --follow-ftp                follow FTP links from HTML documents.
+       --follow-tags=LIST          comma-separated list of followed HTML tags.
+       --ignore-tags=LIST          comma-separated list of ignored HTML tags.
+  -H,  --span-hosts                go to foreign hosts when recursive.
+  -L,  --relative                  follow relative links only.
+  -I,  --include-directories=LIST  list of allowed directories.
+  --trust-server-names             use the name specified by the redirection
+                                   url last component.
+  -X,  --exclude-directories=LIST  list of excluded directories.
+  -np, --no-parent                 don't ascend to the parent directory.
+"""
 
     </script>
 </head>
 <body>
     <div>
         <input class="filter" type="text" style="width:500px"/>
+        <select class="program">
+        </select>
     </div>
     <table class="help">
     <thead>
@@ -178,34 +400,43 @@ Options: (H) means HTTP/HTTPS only, (F) means FTP only
     <script type="text/coffeescript">
 
         $ ->
+        
+            update = ->
+                program = $('.program').val()
 
-            # parse the raw help text into our table, creating a row for each curl option
-            pattern = ///
-                    ^\s+(-(?:\w|\d|\#))?          # option, short form
-                    /?(--(?:[a-z0-9.\-])+)?       # option, long form
-                    \s*(<(?:[a-z0-9\[\]:=/@])+>)? # option parameters
-                    \s*(.*)$                      # description
-                      ///gim
+                # parse the raw help text into our table, creating a row for each program option
+                pattern = ///
+                        ^\s+(-(?:\w|\d|\#))?          # option, short form
+                        [/,]?\s*(--(?:[a-z0-9.\-])+)?       # option, long form
+                        \s*(<(?:[a-z0-9\[\]:=/@])+>)? # option parameters
+                        \s*(.*)$                      # description
+                          ///gim
 
-            htmlEncode = (value) -> $("<div/>").text(value or '').html()
-            wrapInCell = (match) -> "<td>#{htmlEncode(match)}</td>"
-            $tbody = $(".help tbody")
+                htmlEncode = (value) -> $("<div/>").text(value or '').html()
+                wrapInCell = (match) -> "<td>#{htmlEncode(match)}</td>"
+                $tbody = $(".help tbody").empty()
 
-            while line = pattern.exec(window.rawCurlHelp)
-                $tbody.append("<tr>" + (wrapInCell(match) for match in line[1..4]) + "</tr>")
+                while line = pattern.exec(window.rawHelp[program])
+                    $tbody.append("<tr>" + (wrapInCell(match) for match in line[1..4]) + "</tr>")
 
 
-            # set up our type-to-filter
-            $.expr[":"].Contains = (a, i, m) -> $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0
+                # set up our type-to-filter
+                $.expr[":"].Contains = (a, i, m) -> $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0
 
-            filterTable = (text) ->
-                $rows = $('.help tbody tr')
-                if text
-                    $rows.hide().filter(":Contains('#{text}')").show()
-                else
-                    $rows.show()
+                filterTable = (text) ->
+                    $rows = $('.help tbody tr')
+                    if text
+                        $rows.hide().filter(":Contains('#{text}')").show()
+                    else
+                        $rows.show()
 
-            $(".filter").focus().typeWatch { highlight: false, wait: 100, captureLength: -1, callback: filterTable }
+                $(".filter").focus().typeWatch { highlight: false, wait: 100, captureLength: -1, callback: filterTable }
+
+            programSelect = $('.program').change(update)
+            for program, help of window.rawHelp
+                programSelect.append($('<option/>').text(program))
+
+            update()
 
     </script>
 </body>
